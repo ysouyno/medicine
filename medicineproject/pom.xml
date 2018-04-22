@@ -1,12 +1,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>medicine</groupId>
+	<parent>
+		<!-- 父模块的相对路径， 父模块目录中要有pom.xml -->
+		<relativePath>../medicineparent</relativePath>
+		<groupId>medicine</groupId>
+		<artifactId>medicineparent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<!-- <groupId>medicine</groupId> -->
 	<artifactId>medicineproject</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<!-- <version>0.0.1-SNAPSHOT</version> -->
 	<name>medicineproject Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+
 	<dependencies>
 		<!-- 依赖技术架构模块 -->
 		<dependency>
@@ -94,7 +103,6 @@
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
-
 			<!-- war包生成插件 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -112,11 +120,11 @@
 				<configuration>
 					<container>
 						<containerId>tomcat7x</containerId>
-						<home>e:/apache-tomcat-7.0.52</home>
+						<home>D:\apache-tomcat-7.0.86</home>
 					</container>
 					<configuration>
 						<type>existing</type>
-						<home>e:/apache-tomcat-7.0.52</home>
+						<home>D:\apache-tomcat-7.0.86</home>
 					</configuration>
 				</configuration>
 				<executions>

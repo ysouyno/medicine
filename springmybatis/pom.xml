@@ -2,9 +2,17 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>medicine</groupId>
+	<parent>
+		<!-- 父模块的相对路径， 父模块目录中要有pom.xml -->
+		<relativePath>../medicineparent</relativePath>
+		<groupId>medicine</groupId>
+		<artifactId>medicineparent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<!-- <groupId>medicine</groupId> -->
 	<artifactId>springmybatis</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<!-- <version>0.0.1-SNAPSHOT</version> -->
 	<packaging>jar</packaging>
 
 	<name>springmybatis</name>
