@@ -22,10 +22,19 @@
 	</bean>
 
 	<!-- 使用MapperFactoryBean生成mapper的代理对象 -->
-	<bean id="sysuserCustomMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<!-- 配置mapper接口 -->
-		<property name="mapperInterface" value="medicine.base.dao.mapper.SysuserCustomMapper" />
-		<!-- 配置sqlSessionFactory -->
-		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	<!-- <bean id="sysuserCustomMapper" class="org.mybatis.spring.mapper.MapperFactoryBean"> -->
+	<!-- 配置mapper接口 -->
+	<!-- <property name="mapperInterface" value="medicine.base.dao.mapper.SysuserCustomMapper" 
+		/> -->
+	<!-- 配置sqlSessionFactory -->
+	<!-- <property name="sqlSessionFactory" ref="sqlSessionFactory" /> -->
+	<!-- </bean> -->
+
+	<!-- 配置mapper自动扫描器，因为是自动扫描所以不需要id -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 配置扫描包路径，如果扫描多个包路径，中间使用逗号隔开 -->
+		<property name="basePackage" value="medicine.base.dao.mapper" />
+		<!-- 配置SqlSessionFactory -->
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 </beans>
