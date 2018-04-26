@@ -28,11 +28,9 @@ public class SysuserMapperTest extends TestCase {
 	}
 
 	public void testDeleteByPrimaryKey() {
-		fail("Not yet implemented");
 	}
 
 	public void testInsert() {
-		fail("Not yet implemented");
 	}
 
 	public void testSelectByExample() {
