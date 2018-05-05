@@ -1,14 +1,11 @@
-package medicine.base.service;
+package medicine.base.dao.mapper;
 
 import java.util.List;
 
-import medicine.base.pojo.po.Sysuser;
 import medicine.base.pojo.vo.SysuserCustom;
 import medicine.base.pojo.vo.SysuserQueryVo;
 
-public interface UserService {
-	public Sysuser findSysuserById(String id) throws Exception;
-
+public interface SysuserMapperCustom {
 	public List<SysuserCustom> findSysuserList(SysuserQueryVo sysuserQueryVo)
 			throws Exception;
 }
