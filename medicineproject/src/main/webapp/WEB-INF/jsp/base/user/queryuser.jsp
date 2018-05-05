@@ -57,7 +57,7 @@
 		}
 	} ] ];
 
-	// 定义 datagird工具
+	// 定义datagird工具
 	var toolbar_v = [ { // 工具栏
 		id : 'btnadd',
 		text : '添加',

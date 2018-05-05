@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import medicine.util.ResourcesUtil;
-
 public class ResultInfo {
 	public static final int TYPE_RESULT_FAIL = 0; // 失败
 	public static final int TYPE_RESULT_SUCCESS = 1; // 成功
@@ -54,7 +52,7 @@ public class ResultInfo {
 	private Map<String, Object> sysdata = new HashMap<String, Object>();
 
 	/**
-	 * 构造函数,根据提交信息代码messageCode获取提示信息
+	 * 构造函数，根据提交信息代码messageCode获取提示信息
 	 * 
 	 * @param MESSAGE
 	 */

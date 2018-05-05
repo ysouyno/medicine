@@ -20,6 +20,7 @@
 
 	<select id="findSysuserList" parameterType="medicine.base.pojo.vo.SysuserQueryVo"
 		resultType="medicine.base.pojo.vo.SysuserCustom">
+		<!-- medicine.base.pojo.vo.SysuserCustom指的就是sql语句from后面的这个括号中的语句，即sysmc -->
 		select *
 		from (select SYSUSER.id,
 		SYSUSER.userid,
@@ -40,6 +41,8 @@
 		from usergys where id = sysuser.sysid)) sysmc
 
 		from SYSUSER) sysuser
+
+		<!-- medicine.base.pojo.vo.SysuserQueryVo就是指sql语句where后面的这个query_sysuser_where -->
 		<where>
 			<include refid="query_sysuser_where" />
 		</where>
