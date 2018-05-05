@@ -11,4 +11,6 @@ public interface UserService {
 
 	public List<SysuserCustom> findSysuserList(SysuserQueryVo sysuserQueryVo)
 			throws Exception;
+
+	public int findSysuserCount(SysuserQueryVo sysuserQueryVo) throws Exception;
 }

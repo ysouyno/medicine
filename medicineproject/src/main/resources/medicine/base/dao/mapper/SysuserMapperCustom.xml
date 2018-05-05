@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="medicine.base.dao.mapper.SysuserMapperCustom">
 	<sql id="query_sysuser_where">
 		<if test="sysuserCustom!=null">
@@ -18,17 +18,63 @@
 		</if>
 	</sql>
 
+	<!-- 用户查询 -->
 	<select id="findSysuserList" parameterType="medicine.base.pojo.vo.SysuserQueryVo"
 		resultType="medicine.base.pojo.vo.SysuserCustom">
 		<!-- medicine.base.pojo.vo.SysuserCustom指的就是sql语句from后面的这个括号中的语句，即sysmc -->
-		select *
-		from (select SYSUSER.id,
+		<if test="pageQuery!=null">
+			select page_2.*
+			from (select page_1.*, rownum page_num
+			from
+			(
+		</if>
+		select * from (
+		select
+		SYSUSER.id,
 		SYSUSER.userid,
 		SYSUSER.username,
 		SYSUSER.groupid,
-		SYSUSER.sysid,
 		SYSUSER.userstate,
-		decode(SYSUSER.groupid,
+		SYSUSER.sysid,
+		decode
+		(SYSUSER.groupid,
+		'1',
+		(select mc from userjd where id = sysuser.sysid),
+		'2',
+		(select mc from userjd where id = sysuser.sysid),
+		'3',
+		(select mc
+		from useryy where id = sysuser.sysid),
+		'4',
+		(select mc from usergys
+		where id = sysuser.sysid)
+		) sysmc
+
+		from SYSUSER) sysuser
+		<!-- medicine.base.pojo.vo.SysuserQueryVo就是指sql语句where后面的这个query_sysuser_where -->
+		<where>
+			<include refid="query_sysuser_where" />
+		</where>
+
+		<if test="pageQuery!=null">
+			) page_1
+        <![CDATA[where rownum <= ${pageQuery.PageQuery_end}) page_2 where page_2.page_num >= ${pageQuery.PageQuery_start}]]>
+		</if>
+	</select>
+
+	<!-- 查询列表的总记录数 -->
+	<select id="findSysuserCount" parameterType="medicine.base.pojo.vo.SysuserQueryVo"
+		resultType="int">
+		select count(*) from (
+		select
+		SYSUSER.id,
+		SYSUSER.userid,
+		SYSUSER.username,
+		SYSUSER.groupid,
+		SYSUSER.userstate,
+		SYSUSER.sysid,
+		decode
+		(SYSUSER.groupid,
 		'1',
 		(select mc from userjd where id =
 		sysuser.sysid),
@@ -38,11 +84,10 @@
 		(select mc from useryy where id = sysuser.sysid),
 		'4',
 		(select mc
-		from usergys where id = sysuser.sysid)) sysmc
+		from usergys where id = sysuser.sysid)
+		) sysmc
 
 		from SYSUSER) sysuser
-
-		<!-- medicine.base.pojo.vo.SysuserQueryVo就是指sql语句where后面的这个query_sysuser_where -->
 		<where>
 			<include refid="query_sysuser_where" />
 		</where>

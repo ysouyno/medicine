@@ -8,4 +8,6 @@ import medicine.base.pojo.vo.SysuserQueryVo;
 public interface SysuserMapperCustom {
 	public List<SysuserCustom> findSysuserList(SysuserQueryVo sysuserQueryVo)
 			throws Exception;
+
+	public int findSysuserCount(SysuserQueryVo sysuserQueryVo) throws Exception;
 }

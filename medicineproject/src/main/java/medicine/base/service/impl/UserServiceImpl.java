@@ -28,4 +28,9 @@ public class UserServiceImpl implements UserService {
 			throws Exception {
 		return sysuserMapperCustom.findSysuserList(sysuserQueryVo);
 	}
+
+	@Override
+	public int findSysuserCount(SysuserQueryVo sysuserQueryVo) throws Exception {
+		return sysuserMapperCustom.findSysuserCount(sysuserQueryVo);
+	}
 }

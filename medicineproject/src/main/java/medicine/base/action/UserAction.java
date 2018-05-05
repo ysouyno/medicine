@@ -2,6 +2,7 @@ package medicine.base.action;
 
 import java.util.List;
 
+import medicine.base.pojo.vo.PageQuery;
 import medicine.base.pojo.vo.SysuserCustom;
 import medicine.base.pojo.vo.SysuserQueryVo;
 import medicine.base.process.result.DataGridResultInfo;
@@ -26,15 +27,28 @@ public class UserAction {
 	}
 
 	// DataGridResultInfo通过@ResponseBody将java对象转化成json
+	// 第二个参数page和第三个参数rows的名字不可以修改为其它，必须为page和rows
 	@RequestMapping("/queryuser_result")
 	public @ResponseBody
-	DataGridResultInfo queryuser_result(SysuserQueryVo sysuserQueryVo)
-			throws Exception {
-		List<SysuserCustom> rows = userService.findSysuserList(sysuserQueryVo);
+	DataGridResultInfo queryuser_result(SysuserQueryVo sysuserQueryVo,
+			int page, int rows) throws Exception {
+		sysuserQueryVo = sysuserQueryVo != null ? sysuserQueryVo
+				: new SysuserQueryVo();
+
+		// 查询的总数
+		int total = userService.findSysuserCount(sysuserQueryVo);
+
+		PageQuery pageQuery = new PageQuery();
+		pageQuery.setPageParams(total, rows, page);
+		sysuserQueryVo.setPageQuery(pageQuery);
+
+		// 分页查询，向sysuserQueryVo传入pageQuery
+		List<SysuserCustom> list_rows = userService
+				.findSysuserList(sysuserQueryVo);
 
 		DataGridResultInfo dataGridResultInfo = new DataGridResultInfo();
-		dataGridResultInfo.setTotal(rows.size());
-		dataGridResultInfo.setRows(rows);
+		dataGridResultInfo.setTotal(total);
+		dataGridResultInfo.setRows(list_rows);
 
 		return dataGridResultInfo;
 	}
